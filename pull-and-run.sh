@@ -87,6 +87,13 @@ print_success "Old containers removed"
 # 6. Pull images dari Docker Hub
 echo ""
 echo "6️⃣  Pull images dari Docker Hub..."
+print_info "Downloading backend..."
+docker pull $BACKEND_IMAGE
+if [ $? -ne 0 ]; then
+    print_error "Pull backend gagal!"
+    exit 1
+fi
+
 print_info "Downloading frontend..."
 docker pull $FRONTEND_IMAGE
 if [ $? -ne 0 ]; then
@@ -95,6 +102,30 @@ if [ $? -ne 0 ]; then
 fi
 
 print_success "Images berhasil di-pull!"
+
+# 7. Run Backend
+echo ""
+echo "7️⃣  Run Backend container..."
+docker run -d \
+  --name user-identity-backend \
+  --restart unless-stopped \
+  -p 3040:3040 \
+  -e NODE_ENV=production \
+  -e SUPABASE_URL="$SUPABASE_URL" \
+  -e SUPABASE_ANON_KEY="$SUPABASE_ANON_KEY" \
+  -e SUPABASE_SERVICE_ROLE_KEY="$SUPABASE_SERVICE_ROLE_KEY" \
+  -e JWT_SECRET="$JWT_SECRET" \
+  -e PORT=3040 \
+  --network app-network \
+  $BACKEND_IMAGE
+
+if [ $? -eq 0 ]; then
+    print_success "Backend container running!"
+else
+    print_error "Backend failed to start!"
+    docker logs user-identity-backend
+    exit 1
+fi
 
 # 8. Run Frontend
 echo ""
