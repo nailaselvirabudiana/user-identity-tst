@@ -22,7 +22,7 @@ services:
     container_name: user-identity-frontend
     restart: unless-stopped
     ports:
-      - "3000:80"
+      - "3060:80"
     depends_on:
       - backend
     networks:

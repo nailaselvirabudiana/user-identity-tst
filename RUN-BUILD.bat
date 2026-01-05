@@ -41,54 +41,39 @@ if errorlevel 1 (
 echo [OK] Login berhasil!
 echo.
 
-REM 3. Build Backend
-echo 3. Build Backend Image...
+REM 3. Setup buildx untuk multi-platform
+echo 3. Setup Docker Buildx untuk multi-platform...
+docker buildx create --name multibuilder --use 2>nul
+docker buildx inspect --bootstrap
+echo [OK] Buildx ready!
+echo.
+
+REM 4. Build Backend (Multi-platform: AMD64 + ARM64)
+echo 4. Build Backend Image untuk AMD64 ^& ARM64...
 cd backend
-docker build -t %BACKEND_IMAGE%:%VERSION% .
+docker buildx build --platform linux/amd64,linux/arm64 -t %BACKEND_IMAGE%:%VERSION% --push .
 if errorlevel 1 (
     echo [ERROR] Build backend gagal!
     cd ..
     pause
     exit /b 1
 )
-echo [OK] Backend image built!
+echo [OK] Backend image built ^& pushed!
 cd ..
 echo.
 
-REM 4. Build Frontend
-echo 4. Build Frontend Image...
+REM 5. Build Frontend (Multi-platform: AMD64 + ARM64)
+echo 5. Build Frontend Image untuk AMD64 ^& ARM64...
 cd frontend
-docker build -t %FRONTEND_IMAGE%:%VERSION% .
+docker buildx build --platform linux/amd64,linux/arm64 -t %FRONTEND_IMAGE%:%VERSION% --push .
 if errorlevel 1 (
     echo [ERROR] Build frontend gagal!
     cd ..
     pause
     exit /b 1
 )
-echo [OK] Frontend image built!
+echo [OK] Frontend image built ^& pushed!
 cd ..
-echo.
-
-REM 5. Push Backend
-echo 5. Push Backend ke Docker Hub...
-docker push %BACKEND_IMAGE%:%VERSION%
-if errorlevel 1 (
-    echo [ERROR] Push backend gagal!
-    pause
-    exit /b 1
-)
-echo [OK] Backend pushed!
-echo.
-
-REM 6. Push Frontend
-echo 6. Push Frontend ke Docker Hub...
-docker push %FRONTEND_IMAGE%:%VERSION%
-if errorlevel 1 (
-    echo [ERROR] Push frontend gagal!
-    pause
-    exit /b 1
-)
-echo [OK] Frontend pushed!
 echo.
 
 REM Summary
