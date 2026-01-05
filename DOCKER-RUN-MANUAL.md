@@ -60,7 +60,7 @@ docker run -d \
 docker run -d \
   --name user-identity-frontend \
   --restart unless-stopped \
-  -p 3000:80 \
+  -p 3060:80 \
   --network app-network \
   noivira124/user-identity-tst-frontend:latest
 ```

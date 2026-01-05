@@ -231,7 +231,7 @@ Proxy Directory: /api
 6. Klik **"Add reverse proxy"** lagi
 ```
 Proxy Name: Frontend
-Target URL: http://127.0.0.1:3000
+Target URL: http://127.0.0.1:3060
 Proxy Directory: /
 ```
 

@@ -123,7 +123,7 @@ INSERT INTO users (id, name, email, role, status, password) VALUES
    - Add proxy #2:
      ```
      Name: Frontend
-     URL: http://127.0.0.1:3000
+     URL: http://127.0.0.1:3060
      Directory: /
      ```
 

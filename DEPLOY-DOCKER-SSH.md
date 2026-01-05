@@ -91,7 +91,7 @@ docker-compose ps
 ✅ Harusnya muncul 2 container dengan status "Up":
 ```
 user-identity-backend    Up    0.0.0.0:3040->3040/tcp
-user-identity-frontend   Up    0.0.0.0:3000->80/tcp
+user-identity-frontend   Up    0.0.0.0:3060->80/tcp
 ```
 
 ```bash

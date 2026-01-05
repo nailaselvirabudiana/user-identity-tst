@@ -65,7 +65,7 @@ http://[IP-SERVER]:7800
 - Add proxy lagi:
   ```
   Name: Frontend
-  Target URL: http://127.0.0.1:3000
+  Target URL: http://127.0.0.1:3060
   Proxy directory: /
   ```
 - Enable → Submit

@@ -185,7 +185,7 @@ Directory: /api
 **Frontend:**
 ```
 Name: Frontend
-URL: http://127.0.0.1:3000
+URL: http://127.0.0.1:3060
 Directory: /
 ```
 

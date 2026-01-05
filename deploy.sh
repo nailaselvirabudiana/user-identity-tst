@@ -129,7 +129,7 @@ fi
 # 10. Test frontend
 echo ""
 echo "🔟 Testing frontend..."
-response=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:3000/)
+response=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:3060/)
 if [ "$response" == "200" ]; then
     print_success "Frontend berjalan dengan baik!"
 else
@@ -143,12 +143,12 @@ echo "🎉 DEPLOY SELESAI!"
 echo "================================================"
 echo ""
 print_success "Backend: http://localhost:3040"
-print_success "Frontend: http://localhost:3000"
+print_success "Frontend: http://localhost:3060"
 echo ""
 print_info "LANGKAH SELANJUTNYA:"
 echo "1. Setup Reverse Proxy di aaPanel"
 echo "   - Backend: /api → http://127.0.0.1:3040"
-echo "   - Frontend: / → http://127.0.0.1:3000"
+echo "   - Frontend: / → http://127.0.0.1:3060"
 echo ""
 echo "2. Install SSL Certificate di aaPanel"
 echo ""
