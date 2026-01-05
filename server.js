@@ -18,7 +18,7 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, 'frontend/dist')));
   
   // Handle React Router - semua route non-API ke index.html
-  app.get('*', (req, res) => {
+  app.get('/{*splat}', (req, res) => {
     if (!req.path.startsWith('/api')) {
       res.sendFile(path.join(__dirname, 'frontend/dist', 'index.html'));
     }
