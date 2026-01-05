@@ -97,7 +97,7 @@ docker-compose ps
 
 # Harusnya melihat:
 # user-identity-backend   Up   0.0.0.0:3040->3040/tcp
-# user-identity-frontend  Up   0.0.0.0:3000->80/tcp
+# user-identity-frontend  Up   0.0.0.0:3060->80/tcp
 ```
 
 ---
@@ -126,7 +126,7 @@ docker-compose ps
 ### 5.3 Setup Reverse Proxy untuk Frontend
 1. Tambah proxy lagi:
    - **Name**: Frontend
-   - **Target URL**: `http://127.0.0.1:3000`
+   - **Target URL**: `http://127.0.0.1:3060`
    - **Proxy directory**: `/`
    - **Send domain**: `$host`
 
