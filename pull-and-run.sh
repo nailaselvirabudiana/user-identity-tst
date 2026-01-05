@@ -34,7 +34,7 @@ print_success "Docker ready"
 # 2. Setup environment
 echo ""
 echo "2️⃣  Setup environment..."
-cd /www/wwwroot/queenifyofficial.site
+cd /www/wwwroot/user-identity-tst
 
 if [ ! -f ".env" ]; then
     if [ -f ".env.production" ]; then
