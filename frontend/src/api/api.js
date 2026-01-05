@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 // Auto-detect backend URL based on environment
-const API_URL = 'https://queenifyofficial.site/'
+const API_URL = 'https://queenifyofficial.site/api'
 const api = axios.create({
   baseURL: API_URL
 })
