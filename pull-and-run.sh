@@ -133,7 +133,7 @@ echo "8️⃣  Run Frontend container..."
 docker run -d \
   --name user-identity-frontend \
   --restart unless-stopped \
-  -p 3000:80 \
+  -p 3060:80 \
   --network app-network \
   $FRONTEND_IMAGE
 
@@ -161,7 +161,7 @@ echo "1️⃣1️⃣  Testing..."
 sleep 5
 
 backend_status=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:3040/)
-frontend_status=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:3000/)
+frontend_status=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:3060/)
 
 if [ "$backend_status" == "200" ]; then
     print_success "Backend running (HTTP $backend_status)"
@@ -182,11 +182,11 @@ echo "🎉 DEPLOY SELESAI!"
 echo "================================================"
 echo ""
 print_success "Backend: http://localhost:3040"
-print_success "Frontend: http://localhost:3000"
+print_success "Frontend: http://localhost:3060"
 echo ""
 print_info "Setup Reverse Proxy di aaPanel:"
 echo "   /api → http://127.0.0.1:3040"
-echo "   /    → http://127.0.0.1:3000"
+echo "   /    → http://127.0.0.1:3060"
 echo ""
 print_info "Perintah berguna:"
 echo "   docker logs user-identity-backend      # Lihat logs"
