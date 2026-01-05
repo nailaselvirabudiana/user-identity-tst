@@ -6,7 +6,12 @@ const { auth, requireRole } = require("../middleware/auth");
 
 // LOGIN
 router.post("/auth/login", async (req, res) => {
-    const { email, password } = req.body;
+    const { email, password } = req.body || {};
+    
+    if (!email || !password) {
+        return res.status(400).json({ message: "Email and password are required" });
+    }
+    
     const { data: user, error } = await supabase
         .from('users')
         .select('*')
