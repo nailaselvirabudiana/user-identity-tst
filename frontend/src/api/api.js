@@ -1,9 +1,7 @@
 import axios from 'axios'
 
 // Auto-detect backend URL based on environment
-const API_URL = import.meta.env.PROD 
-  ? 'https://queenifyofficial.site/api'  // Production URL
-  : 'http://localhost:3040/api'          // Development URL
+const API_URL = 'http://localhost:3040/api'           // Development URL
 
 const api = axios.create({
   baseURL: API_URL
