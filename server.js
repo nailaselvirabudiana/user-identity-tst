@@ -9,6 +9,11 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Health check - harus sebelum static files
+app.get('/health', (req, res) => {
+  res.json({ status: 'ok', message: 'User Identity API is running' });
+});
+
 // API Routes
 const usersRouter = require('./src/routes/users');
 app.use('/api', usersRouter);
@@ -19,16 +24,9 @@ if (process.env.NODE_ENV === 'production') {
   
   // Handle React Router - semua route non-API ke index.html
   app.get('/{*splat}', (req, res) => {
-    if (!req.path.startsWith('/api')) {
-      res.sendFile(path.join(__dirname, 'frontend/dist', 'index.html'));
-    }
+    res.sendFile(path.join(__dirname, 'frontend/dist', 'index.html'));
   });
 }
-
-// Health check
-app.get('/health', (req, res) => {
-  res.json({ status: 'ok', message: 'User Identity API is running' });
-});
 
 const PORT = process.env.PORT || 3040;
 app.listen(PORT, () => {
